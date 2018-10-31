@@ -1,0 +1,68 @@
+<div class="dropdown">
+    <button class="btn btn-dropdown" (click)="showPicker = !showPicker">
+        <span class="float-left" *ngIf="!haveDates()">Select Date</span>
+        <span class="float-left" *ngIf="haveDates()" [innerHTML]="buttonText()"></span>
+        <span class="fa-calendar"></span>
+    </button>
+    <div class="dropdown-menu" [class.show]="showPicker">
+        <div class="daterange-container">
+            <div class="calendar-days-view" [class.d-none]="calendarView !== 'days'" >
+                <div class="calendar left">
+                    <div class="calendar-nav">
+                        <button type="button" class="btn btn-nav left" (click)="prevMonth()"></button>
+                        <button type="button" class="btn btn-month" (click)="calendarView = 'months'" >{{ leftCalendarMonth }}</button>
+                        <button type="button" class="btn btn-year" (click)="calendarView = 'years'" >{{ leftCalendarYear }}</button>
+                    </div>
+                    <div class="day-container">
+                        <div class="day" *ngFor="let d of days" [innerHTML]="d.substr(0, 3)" ></div>
+                    </div>
+                    <div class="calendar-day offset" *ngFor="let d of leftCalendarOffset"></div>
+                    <div class="calendar-day date" *ngFor="let d of leftCalendarDays">
+                        <button type="button" class="btn btn-day" [ngClass]="{'in-range': (inRange(d) || isSelectedRange(d)), 'start-end': (isEqual(d, start) || isEqual(d, end)), 'disabled': (disabled(d))}" (click)="setDate(d)" (mouseover)="mouseover(d)" [disabled]="disabled(d)" >{{ d | date: 'd' }}</button>
+                    </div>
+                </div>
+                <div class="calendar right">
+                    <div class="calendar-nav">
+                        <button type="button" class="btn btn-month" (click)="calendarView = 'months'">{{ rightCalendarMonth }}</button>
+                        <button type="button" class="btn btn-year" (click)="calendarView = 'years'" >{{ rightCalendarYear }}</button>
+                        <button type="button" class="btn btn-nav right" (click)="nextMonth()"></button>
+                    </div>
+                    <div class="day-container">
+                        <div class="day" *ngFor="let d of days" [innerHTML]="d.substr(0, 3)" ></div>
+                    </div>
+                    <div class="calendar-day offset" *ngFor="let d of rightCalendarOffset"></div>
+                    <div class="calendar-day date" *ngFor="let d of rightCalendarDays">
+                        <button type="button" class="btn btn-day" [ngClass]="{'in-range': (inRange(d) || isSelectedRange(d)), 'start-end': (isEqual(d, start) || isEqual(d, end)), 'disabled': (disabled(d))}" (click)="setDate(d)" (mouseover)="mouseover(d)" [disabled]="disabled(d)" >{{ d | date: 'd' }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="calendar-months-view" [class.d-none]="calendarView !== 'months'" >
+                <div class="calendar-nav">
+                    <button type="button" class="btn btn-nav left" (click)="prevYear()"></button>
+                    <button type="button" class="btn btn-year" (click)="calendarView = 'years'" >{{ leftCalendarYear }}</button>
+                    <button type="button" class="btn btn-nav right" (click)="nextYear()"></button>
+                </div>
+                <div class="calendar-month" *ngFor="let month of months">
+                    <button class="btn btn-month" (click)="setMonth(month)" >{{ month }}</button>
+                </div>
+            </div>
+             <div class="calendar-years-view" [class.d-none]="calendarView !== 'years'" >
+                <div class="calendar-nav">
+                    <button type="button" class="btn btn-nav left" (click)="prevDecade()"></button>
+                    <button type="button" class="btn btn-year" >{{ years[0] }} - {{ years[9] }}</button>
+                    <button type="button" class="btn btn-nav right" (click)="nextDecade()"></button>
+                </div>
+                <div class="calendar-year" *ngFor="let year of years">
+                    <button class="btn btn-year" (click)="setYear(year)" >{{ year }}</button>
+                </div>
+            </div>
+            <div class="preset-ranges" *ngIf="presetRanges.length">
+                <button type="button" class="btn btn-range" *ngFor="let range of presetRanges" (click)="selectRange(range)" [class.selected]="(isEqual(range.start, start) && isEqual(range.end, end))" >{{ range.label }}</button>
+            </div>
+            <div class="actions">
+                <button class="btn btn-apply float-right" [disabled]="!start || !end" (click)="applyDates()">{{ _options.applyLabel }}</button>
+                <button class="btn btn-cancel float-right" (click)="cancel()">{{ _options.cancelLabel }}</button>
+            </div>
+        </div>
+    </div>
+</div>

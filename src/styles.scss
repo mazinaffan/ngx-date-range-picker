@@ -1,1 +1,303 @@
-/* You can add global styles to this file, and also import other style files */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 30rem;
+    margin: 0.125rem 0 0;
+    padding: 1em;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+
+    &.show {
+        display: block;
+    }
+}
+
+.daterange-container {
+    font-family: 'Roboto';
+    min-height: 315px;
+    // width: 672px;
+    display: flex;
+
+    .calendar {
+        max-width: 252px;
+        min-height: 280px;
+        display: inline-block;
+        vertical-align: top;
+
+        &.left {
+            margin-right: .05em;
+        }
+    }
+
+    .calendar-nav {
+    }
+
+    .calendar-days-view {
+    }
+
+    .calendar-months-view {
+    }
+
+    .calendar-years-view {
+    }
+
+    .preset-ranges {
+        width: 160px;
+        padding-left: 1em;
+    }
+
+    .actions {
+        position: absolute;
+        bottom: 1em;
+        right: 1em;
+    }
+}
+
+.calendar-day {
+    display: inline-block;
+    max-width: 36px;
+    width: 36px;
+    max-height: 36px;
+    height: 36px;
+    font-weight: bold;
+
+    &.offset {
+        vertical-align: bottom;
+    }
+
+    &.date {
+    }
+}
+
+.btn {
+    max-height: 36px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    cursor: pointer;
+
+    &.disabled, &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    &:focus {
+        outline: 0;
+        box-shadow: none;
+    }
+}
+
+.btn-dropdown {
+    display: block;
+    width: 100%;
+    max-width: 20em;
+
+    .fa-calendar {
+        background-size: 24px 24px;
+        width: 24px;
+        height: 24px;
+        background: url('/assets/calendar.svg') no-repeat center;
+        float: right;
+        transition: transform ease-in 0.12s;
+    }
+}
+
+.btn-range {
+    color: rgb(52, 58, 64);
+    display: block;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid rgb(52, 58, 64);
+
+    &:hover {
+        color: #333;
+        background-color: #999;
+        border-color: #999;
+    }
+
+    +.btn-range {
+        margin-top: 0.5em;
+    }
+
+    &.selected {
+        background-color: #343a40;
+        border-color: #343a40;
+        color: #fff;
+    }
+}
+
+.btn-day {
+    display: block;
+    height: 36px;
+    max-height: 36px;
+    text-size-adjust: 100%;
+    width: 36px;
+    perspective-origin: 18px 18px;
+    transform-origin: 18px 18px;
+    font-weight: bold;
+    padding: 6px 0px;
+
+    &.in-range {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    &.start-end {
+        background-color: #999;
+        color: #333;
+    }
+}
+
+.calendar-nav {
+    text-align: center;
+
+    .btn-nav {
+        background-size: 30px 30px;
+        width: 30px;
+        height: 30px;
+
+        &.left {
+            background: url('/assets/chevron.svg') no-repeat center;
+        }
+
+        &.right {
+            background: url('/assets/chevron.svg') no-repeat center;
+            transform: rotate(180deg);
+        }
+    }
+
+    .btn-month {
+        max-width: 160px;
+        width: 160px;
+    }
+    .btn-year {
+        max-width: 60px;
+        width: 60px;
+    }
+}
+
+.calendar-months-view, .calendar-years-view {
+
+    .calendar-nav {
+        padding-bottom: .5em;
+    }
+
+    .btn-month, .btn-year {
+        max-width: 200px;
+        width: 200px;
+    }
+}
+
+.calendar-month {
+    display: inline-block;
+    min-height: 36px;
+    width: 25%;
+    text-align: center;
+    margin-bottom: .5rem;
+
+    .btn-month {
+        border: 1px solid #343a40;
+        color: #343a40;
+        font-size: 14px;
+        background-color: transparent;
+        width: 96%;
+
+        &:hover {
+            background-color: #343a40;
+            color: #fff
+        }
+    }
+}
+
+.calendar-year {
+    display: inline-block;
+    min-height: 36px;
+    width: 20%;
+    text-align: center;
+    margin-bottom: .5rem;
+
+    .btn-year {
+        border: 1px solid #343a40;
+        color: #343a40;
+        font-size: 14px;
+        background-color: transparent;
+        width: 96%;
+
+        &:hover {
+            background-color: #343a40;
+            color: #fff
+        }
+    }
+}
+
+.day {
+    background-color: #777;
+    color: #eee;
+    font-weight: bold;
+    display: inline-block;
+    max-width: 36px;
+    width: 36px;
+    padding: 4px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    border: 1px solid #343a40;
+    color: #343a40;
+    margin-right: .5em;
+
+    &:hover {
+        background-color: #343a40;
+        color: #fff;
+    }
+}
+
+.btn-apply {
+    background-color: #343a40;
+    color: #fff;
+
+    &:hover {
+        background-color: #23272b;
+    }
+}
+
+.d-none {
+    display: none !important;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
